@@ -1,14 +1,15 @@
 import 'package:flutter/foundation.dart';
 
 class ToDoTask{
+  
 
   final String id;
   final String title;
   bool isComplete;
   final String detail;
   final String imageUrl;
-  final String dateAdded;
-  final String deadLine;
+  final DateTime dateAdded;
+  final DateTime deadLine;
 
   ToDoTask({
     @required this.id,

@@ -1,10 +1,12 @@
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:todolist/Provider/CatergoryProvider.dart';
 import 'package:todolist/Provider/pagerItemProvider.dart';
+import 'package:todolist/Screens/EditUserProduct.dart';
 
-import './Screens/select_navigation_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:todolist/Screens/select_navigation_screen.dart';
+import 'package:todolist/Screens/to_do_task_details_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -43,6 +45,10 @@ class MyApp extends StatelessWidget {
               )
       ),
       home: SelectNavigationScreen(),
+      routes: {
+                ToDoTaskDetailsScreen.routeName: (context) => ToDoTaskDetailsScreen(),
+                NewData.routeName:(context)=>NewData(),
+                }
     ),);
   }
 

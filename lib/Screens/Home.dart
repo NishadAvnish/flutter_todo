@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/Provider/pagerItemProvider.dart';
+import 'package:todolist/Screens/EditUserProduct.dart';
 import 'package:todolist/Widgets/ChoiceChip.dart';
 import 'package:todolist/Widgets/cardItem.dart';
 
@@ -18,6 +19,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+   
 
     pageController.addListener(() {
       var next = pageController.page.round();
@@ -32,7 +34,7 @@ class _HomeState extends State<Home> {
   }
   @override
   void didChangeDependencies() {
-    Provider.of<PagerItemProvider>(context).getList();
+     //Provider.of<PagerItemProvider>(context).changeValue(0);
     super.didChangeDependencies();
   }
 
@@ -41,6 +43,7 @@ class _HomeState extends State<Home> {
     final _height = MediaQuery.of(context).size.height;
     final _width = MediaQuery.of(context).size.width;
     return Scaffold(
+      //bottomNavigationBar: SelectNavigationScreen(),
       body: Stack(
         children: <Widget>[
           Positioned(
@@ -68,6 +71,20 @@ class _HomeState extends State<Home> {
              bottom: 0,
              left: 0,
             child:ChoiceChipItems()),
+
+            Positioned(
+             right: _width*0.05,
+             bottom: _height*0.015,
+             
+            child:FloatingActionButton(
+              onPressed: (){
+                Navigator.of(context).pushNamed(NewData.routeName);
+              },
+
+               child: Icon(Icons.add,color: Colors.red),
+               backgroundColor: Colors.green,
+            )),
+          
         ],
       ),
     );

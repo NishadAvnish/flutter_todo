@@ -44,9 +44,6 @@ class _ChoiceChipItemsState extends State<ChoiceChipItems> {
                         },
                       )
 
-                        
-
-                      
                     );
                   },
       ),
