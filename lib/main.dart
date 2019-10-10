@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'Screens/Home.dart';
+import './Screens/select_navigation_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,10 +10,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        
         primarySwatch: Colors.blue,
+        fontFamily: "RobotoCondensed"
       ),
-      home: Home(),
+      home: SelectNavigationScreen(),
     );
   }
 }
