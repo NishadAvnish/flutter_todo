@@ -13,7 +13,7 @@ class _ToDoTaskDetailsScreenState extends State<ToDoTaskDetailsScreen>{
   final _toDoTask = ToDoTask(
     id: "id",
     title: "Date with Girl",
-    subTitle: ""
+    //subTitle: ""
   );
 
   @override
