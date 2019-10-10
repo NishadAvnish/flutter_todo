@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/Screens/to_do_task_details_screen.dart';
 
 import 'Home.dart';
 import 'profile_screen.dart';
@@ -20,7 +21,7 @@ class _SelectNavigationScreenState extends State<SelectNavigationScreen> {
     },
     {
       "title" : "Profile",
-      "page"  : ProfileScreen()
+      "page"  : ToDoTaskDetailsScreen()
     },
     {
       "title" : "Statistics",
