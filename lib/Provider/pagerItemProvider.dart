@@ -29,29 +29,29 @@ class PagerItemProvider with ChangeNotifier{
       ToDoTask(
         id:"jsbdjnsbdmncbsmdnc",
         title: "School1",
-        image:"https://images.unsplash.com/photo-1570631550965-fe4e7b868d38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-         deadLine: DateTime.now(),
+        imageUrl:"https://images.unsplash.com/photo-1570631550965-fe4e7b868d38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+         deadLine: DateTime.now().toIso8601String(),
 
       ),
       ToDoTask(
         id:"jsbdjnsbdmncbsmdnc",
         title: "School2",
-        image:"https://images.unsplash.com/photo-1570631550965-fe4e7b868d38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-         deadLine: DateTime.now(),
+        imageUrl:"https://images.unsplash.com/photo-1570631550965-fe4e7b868d38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+         deadLine: DateTime.now().toIso8601String(),
 
       ),
       ToDoTask(
         id:"jsbdjnsbdmncbsmdnc",
         title: "School3",
-        image:"https://images.unsplash.com/photo-1570631550965-fe4e7b868d38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-         deadLine: DateTime.now(),
+        imageUrl:"https://images.unsplash.com/photo-1570631550965-fe4e7b868d38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+         deadLine: DateTime.now().toIso8601String(),
 
       ),
       ToDoTask(
         id:"jsbdjnsbdmncbsmdnc",
         title: "School4",
-        image:"https://images.unsplash.com/photo-1570631550965-fe4e7b868d38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-         deadLine: DateTime.now(),
+        imageUrl:"https://images.unsplash.com/photo-1570631550965-fe4e7b868d38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+         deadLine: DateTime.now().toIso8601String(),
 
       )
     ];

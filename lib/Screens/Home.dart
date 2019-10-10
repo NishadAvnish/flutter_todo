@@ -3,6 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:todolist/Provider/pagerItemProvider.dart';
 import 'package:todolist/Widgets/ChoiceChip.dart';
 import 'package:todolist/Widgets/cardItem.dart';
+
+import '../Widgets/cardItem.dart';
+
 class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }

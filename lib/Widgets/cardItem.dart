@@ -40,7 +40,7 @@ class CardItem extends StatelessWidget {
                     margin: EdgeInsets.only(top: top, bottom: 50, right: 30),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        image: DecorationImage(image: NetworkImage(pagerItem[index].image)),
+                        image: DecorationImage(image: NetworkImage(pagerItem[index].imageUrl)),
                         boxShadow: [
                           BoxShadow(
                               color: Colors.black87,
