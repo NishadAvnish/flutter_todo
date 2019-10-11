@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/Screens/profile_screen.dart';
+import 'package:todolist/Screens/to_do_task_details_screen.dart';
 
 import 'Home.dart';
-import 'profile_screen.dart';
 import 'statistics_screen.dart';
 
 class SelectNavigationScreen extends StatefulWidget {
@@ -43,20 +44,22 @@ class _SelectNavigationScreenState extends State<SelectNavigationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screensList[_selectedIndex]["page"],
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        currentIndex: _selectedIndex,
-        onTap: (index){
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        items: [
-          _buildBottomNavigationBar("Home", Icons.home),
-          _buildBottomNavigationBar("Profile", Icons.person_outline),
-          _buildBottomNavigationBar("Statistics", Icons.show_chart),
-        ],
+      bottomNavigationBar:  BottomNavigationBar(
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
+          currentIndex: _selectedIndex,
+          onTap: (index){
+            bool isSelected=index==_selectedIndex;
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          items: [
+            _buildBottomNavigationBar("Home", Icons.home),
+            _buildBottomNavigationBar("Profile", Icons.person_outline),
+            _buildBottomNavigationBar("Statistics", Icons.show_chart),
+          ],
+        
       ),
     );
   }
