@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todolist/Provider/CatergoryProvider.dart';
 import 'package:todolist/Provider/pagerItemProvider.dart';
 
 class ChoiceChipItems extends StatefulWidget {
@@ -15,7 +14,6 @@ class _ChoiceChipItemsState extends State<ChoiceChipItems> {
   Widget build(BuildContext context) {
 
     final _height = MediaQuery.of(context).size.height;
-     final categoryItem=Provider.of<CategoryProvider>(context).items;
      final pageViewerItem=Provider.of<PagerItemProvider>(context,listen: false);
      final _width = MediaQuery.of(context).size.width;
     return Container(
@@ -25,13 +23,13 @@ class _ChoiceChipItemsState extends State<ChoiceChipItems> {
       child: ListView.builder(
                    padding: EdgeInsets.symmetric(horizontal: 10),
                   scrollDirection: Axis.horizontal,
-                  itemCount: categoryItem.length,
+                  itemCount:pageViewerItem.categoryItem.length,
                   physics: BouncingScrollPhysics(),
                   itemBuilder: (context,index){
                     return Padding(
                       padding: const EdgeInsets.all(3.0),
                       child: ChoiceChip(
-                        label: Text(categoryItem[index],style: TextStyle(color:Colors.black,fontSize: 15),),
+                        label: Text(pageViewerItem.categoryItem[index],style: TextStyle(color:Colors.black,fontSize: 15),),
                         selected: _value==index,
                         selectedColor: Colors.blue[200],
                         disabledColor: Colors.white,

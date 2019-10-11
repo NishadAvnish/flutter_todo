@@ -1,28 +1,37 @@
+import 'dart:core' ;
+
+
 import 'package:flutter/material.dart';
 import 'package:todolist/models/to_do_task.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class PagerItemProvider with ChangeNotifier{
+
+List<String> _category=[
+   "School",
+   "Work",
+   "Exercise",
+   "Diet",
+    
+ ];
+
+ List<String> get categoryItem{
+   return [..._category];
+ }
+
+
+
   int value=0;
   String name;
-  List<String>list1;
+  
   List<ToDoTask> _list = [];
 
-  PagerItemProvider(
-    this.list1
-    
-  );
-
- void getList(){
-    list1!=null?name=list1[value]:name=null;
-    
-    //just
- }
+  
 
   void changeValue(value1){
    value=value1;
-   fetchShow();
+   fetchShow(categoryItem[value]);
    notifyListeners();
    
     }
@@ -68,6 +77,9 @@ class PagerItemProvider with ChangeNotifier{
     //   )
     // ];
     
+    int get values{
+      return value;
+    }
 
     List<ToDoTask> get items{
       return [..._list];  
@@ -77,9 +89,10 @@ class PagerItemProvider with ChangeNotifier{
     return _list.firstWhere((prod) => prod.id == id);
   }
 
-Future<void> addProduct(ToDoTask product,String category) async {
+Future<void> addProduct(ToDoTask product) async {
+  
     final String url =
-        'https://fluttertodo-49037.firebaseio.com/$category.json';
+        'https://fluttertodo-49037.firebaseio.com/School.json';
     try {
       await http.post(url,
           body: json.encode({
@@ -102,12 +115,19 @@ Future<void> addProduct(ToDoTask product,String category) async {
 
 
 
-Future<void> fetchShow() async {
-  
-    var url ='https://fluttertodo-49037.firebaseio.com/${list1[value]}.json';
+Future<void> fetchShow([String category]) async {
+  var url;
+  if(category!=null){
+    
+    url='https://fluttertodo-49037.firebaseio.com/$category.json';
+  }
+  else{
+   url ='https://fluttertodo-49037.firebaseio.com/School.json';}
+
+   
     List<ToDoTask> list = [];
     final response = await http.get(url);
-    /*print(response.body);*/
+    print(response.body); 
     final extractedData = json.decode(response.body) as Map<String, dynamic>;
 
     if (extractedData == null) {

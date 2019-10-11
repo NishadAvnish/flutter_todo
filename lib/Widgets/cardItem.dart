@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/Provider/pagerItemProvider.dart';
-import 'package:intl/intl.dart';
 import 'package:todolist/Screens/to_do_task_details_screen.dart';
 
 class CardItem extends StatelessWidget {
@@ -29,6 +28,7 @@ class CardItem extends StatelessWidget {
                 pageSnapping: true,
                 itemCount: pagerItem.length,
                 itemBuilder: (context, index) {
+                 
                   bool active = index == currentPage;
 
                   final double blur = active ? 20 : 0;
@@ -59,7 +59,6 @@ class CardItem extends StatelessWidget {
                         child: Stack(
                           
                           children: <Widget>[
-                             
 
                              Positioned(
                             left: 10,
@@ -71,9 +70,9 @@ class CardItem extends StatelessWidget {
                             top: 25,
                             child:Column(
                               children: <Widget>[
-                                Text(pagerItem[index].deadLine.day.toString()),
+                                Text(DateTime.parse(pagerItem[index].deadLine).day.toString()),
                                 SizedBox(height: 1,),
-                                Text(monthList[pagerItem[index].deadLine.month-1]),
+                                Text(monthList[DateTime.parse(pagerItem[index].deadLine).month-1]),
                               ],
                             ),
                           ),

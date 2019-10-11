@@ -8,8 +8,8 @@ class ToDoTask{
   bool isComplete;
   final String detail;
   final String imageUrl;
-  final DateTime dateAdded;
-  final DateTime deadLine;
+  String dateAdded;
+  String  deadLine;
 
   ToDoTask({
     @required this.id,

@@ -25,16 +25,11 @@ class _NewData extends State<NewData> {
     title: " ",
     detail: " ",
     imageUrl: " ",
-    dateAdded: DateTime.now(),
+    dateAdded: DateTime.now().toIso8601String(),
     deadLine: null,
   );
 
-  var _initValues = {
-    'title': '',
-    'description': '',
-    'price': '',
-    'image': '',
-  };
+
 
   var _isInit = true;
   var _isLoading = false;
@@ -76,7 +71,7 @@ class _NewData extends State<NewData> {
     });
 
     Provider.of<PagerItemProvider>(context, listen: false)
-        .addProduct(_editedProduct, "Exercise")
+        .addProduct(_editedProduct)
         .catchError((error) {
       return showDialog(
           context: context,
@@ -164,7 +159,7 @@ class _NewData extends State<NewData> {
                                       detail: _editedProduct.detail,
                                       imageUrl: _editedProduct.imageUrl,
                                       dateAdded: _editedProduct.dateAdded,
-                                      deadLine: datePicked,
+                                      deadLine: datePicked.toIso8601String(),
                                     );
                                   });
                                 }
@@ -222,7 +217,7 @@ class _NewData extends State<NewData> {
                           },
                         ),
                         TextFormField(
-                          initialValue: _initValues['description'],
+                          
                           decoration: InputDecoration(labelText: 'Description'),
                           maxLines: 3,
                           keyboardType: TextInputType.multiline,

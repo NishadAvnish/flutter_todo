@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:todolist/Provider/CatergoryProvider.dart';
 import 'package:todolist/Provider/pagerItemProvider.dart';
 import 'package:todolist/Screens/EditUserProduct.dart';
 
@@ -15,13 +14,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value:CategoryProvider() ),
+        ChangeNotifierProvider.value(value:PagerItemProvider() ),
         
-        ChangeNotifierProxyProvider<CategoryProvider,PagerItemProvider>(
-            builder: (context,category,previousState)
-                {
-                return PagerItemProvider(category.items);}
-        ),
+       
       ],
     
 

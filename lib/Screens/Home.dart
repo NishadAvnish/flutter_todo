@@ -34,12 +34,13 @@ class _HomeState extends State<Home> {
   }
   @override
   void didChangeDependencies() {
-     //Provider.of<PagerItemProvider>(context).changeValue(0);
+    Provider.of<PagerItemProvider>(context).fetchShow();
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<PagerItemProvider>(context).values;
     final _height = MediaQuery.of(context).size.height;
     final _width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -70,7 +71,9 @@ class _HomeState extends State<Home> {
              right: 0,
              bottom: 0,
              left: 0,
-            child:ChoiceChipItems()),
+            child:Provider.of<PagerItemProvider>(context).items.length!=null?
+            
+            ChoiceChipItems():Center(child: Text("NO DATA IS AVAILABLE IN SELECTED CATEGORY"),)),
 
             Positioned(
              right: _width*0.05,
