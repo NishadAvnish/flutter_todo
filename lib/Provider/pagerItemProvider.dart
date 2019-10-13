@@ -9,11 +9,11 @@ import 'package:http/http.dart' as http;
 class PagerItemProvider with ChangeNotifier{
 
 List<String> _category=[
-   "School",
+   "Study",
    "Work",
    "Exercise",
    "Diet",
-    
+   "Others",
  ];
 
  List<String> get categoryItem{
@@ -107,7 +107,7 @@ Future<void> addProduct(ToDoTask product) async {
 
       notifyListeners();
     } catch (error) {
-      print(error);
+      //print(error);
       throw (error);
     }
   }
@@ -127,7 +127,7 @@ Future<void> fetchShow([String category]) async {
    
     List<ToDoTask> list = [];
     final response = await http.get(url);
-    print(response.body); 
+    //print(response.body); 
     final extractedData = json.decode(response.body) as Map<String, dynamic>;
 
     if (extractedData == null) {
