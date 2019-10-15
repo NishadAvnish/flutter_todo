@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:todolist/Provider/pagerItemProvider.dart';
-import 'package:todolist/models/to_do_task.dart';
+
+import '../Provider/pagerItemProvider.dart';
+import '../models/to_do_task.dart';
 
 class NewData extends StatefulWidget {
   static const routeName = '/newData';
@@ -21,15 +23,7 @@ class _NewData extends State<NewData> {
   String category;
 
   var _editedProduct = ToDoTask(
-    id: null,
-    title: " ",
-    detail: " ",
-    imageUrl: " ",
-    dateAdded: DateTime.now().toIso8601String(),
-    deadLine: null,
-  );
-
-
+      id: "", title: "", imageUrl: "", dateAdded: "", deadLine: "", detail: "");
 
   var _isInit = true;
   var _isLoading = false;
@@ -101,214 +95,209 @@ class _NewData extends State<NewData> {
     });
   }
 
+  void _pickDate() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2019),
+      lastDate: DateTime.now(),
+    ).then((datePicked) {
+      if (datePicked != null) {
+        setState(() {
+          _editedProduct.deadLine = DateFormat.yMMMd().format(datePicked);
+        });
+      }
+    });
+  }
+
+  Container _buildText(String text, TextStyle style, double topMargin) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        text,
+        textAlign: TextAlign.start,
+        style: style,
+      ),
+      padding: EdgeInsets.only(
+        top: topMargin,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final _height = MediaQuery.of(context).size.longestSide;
     final _width = MediaQuery.of(context).size.shortestSide;
+    final categoryList = Provider.of<PagerItemProvider>(context,listen: false).categoryItem;
     return Scaffold(
       appBar: AppBar(
         title: Text(
           "New Task",
-          style: TextStyle(color: Colors.black),
         ),
-        backgroundColor: Colors.white,
         actions: <Widget>[
           IconButton(
             icon: Icon(
               Icons.save,
-              color: Colors.teal,
+              color: Colors.black,
             ),
             onPressed: _saveForm,
           ),
         ],
       ),
-      body: _isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : Stack(children: <Widget>[
-              Positioned(
-                top: _height * 0.05,
-                left: 0,
-                child: Container(
-                  height: _height * 0.07,
-                  width: _width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.blue[50],
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: _isLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Column(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      _buildText("Category", Theme.of(context).textTheme.title,0),
+                      DropdownButton<String>(
+                        hint: Text("Choose Category"),
+                        icon: Icon(Icons.category),
+                        underline: null,
+                        onChanged: (String newValue) {
+                          setState(() {
+                            //_editedProduct = newValue;
+                          });
+                        },
+                        items: categoryList
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        GestureDetector(
-                            onTap: () {
-                              showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(2019),
-                                lastDate: DateTime.now(),
-                              ).then((datePicked) {
-                                if (datePicked != null) {
-                                  setState(() {
-                                    print("$datePicked");
-                                    _editedProduct=ToDoTask(
-                                      id: null,
-                                      title: _editedProduct.title,
-                                      detail: _editedProduct.detail,
-                                      imageUrl: _editedProduct.imageUrl,
-                                      dateAdded: _editedProduct.dateAdded,
-                                      deadLine: datePicked.toIso8601String(),
-                                    );
-                                  });
-                                }
-                              });
-                            },
-                            child: Icon(
-                              Icons.calendar_today,
-                              size: 30,
-                            )),
-                        GestureDetector(
-                            onTap: () {
-                              
-                            },
-                            child: Icon(
-                              Icons.arrow_drop_down_circle,
-                              size: 30,
-                            ))
-                      ],
-                    ),
+                  TextFormField(
+                    decoration: InputDecoration(labelText: 'Title'),
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context).requestFocus(_priceFocusNode);
+                    },
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please provide a value.';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _editedProduct = ToDoTask(
+                        id: null,
+                        title: value,
+                        detail: _editedProduct.detail,
+                        imageUrl: _editedProduct.imageUrl,
+                        dateAdded: _editedProduct.dateAdded,
+                        deadLine: _editedProduct.deadLine,
+                      );
+                    },
                   ),
-                ),
-              ),
-              Positioned(
-                top: _height * 0.2,
-                left: _width * 0.05,
-                child: Container(
-                  height: _height * 0.6,
-                  width: _width,
-                  child: Form(
-                    key: _form,
-                    child: ListView(
-                      children: <Widget>[
-                        TextFormField(
-                          decoration: InputDecoration(labelText: 'Title'),
-                          textInputAction: TextInputAction.next,
+                  TextFormField(
+                    decoration: InputDecoration(labelText: 'Description'),
+                    maxLines: 3,
+                    keyboardType: TextInputType.multiline,
+                    focusNode: _descriptionFocusNode,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter a description.';
+                      }
+                      if (value.length < 10) {
+                        return 'Should be at least 10 characters long.';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _editedProduct = ToDoTask(
+                        id: null,
+                        title: _editedProduct.title,
+                        detail: value,
+                        imageUrl: _editedProduct.imageUrl,
+                        dateAdded: _editedProduct.dateAdded,
+                        deadLine: _editedProduct.deadLine,
+                      );
+                    },
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Container(
+                        width: 100,
+                        height: 100,
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.only(
+                          top: 8,
+                          right: 10,
+                        ),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: Colors.grey, width: 1)),
+                        child: _imageController.text.isEmpty
+                            ? Text('Enter a URL')
+                            : Image.network(
+                                _imageController.text,
+                                fit: BoxFit.contain,
+                              ),
+                      ),
+                      Expanded(
+                        child: TextFormField(
+                          decoration: InputDecoration(labelText: 'Image URL'),
+                          keyboardType: TextInputType.url,
+                          textInputAction: TextInputAction.done,
+                          controller: _imageController,
+                          focusNode: _imageFocusNode,
                           onFieldSubmitted: (_) {
-                            FocusScope.of(context)
-                                .requestFocus(_priceFocusNode);
+                            _saveForm();
                           },
                           validator: (value) {
                             if (value.isEmpty) {
-                              return 'Please provide a value.';
+                              return 'Please enter an image URL.';
                             }
-                            return null;
-                          },
-                          onSaved: (value) {
-                             _editedProduct=ToDoTask(
-                                      id: null,
-                                      title: value,
-                                      detail: _editedProduct.detail,
-                                      imageUrl: _editedProduct.imageUrl,
-                                      dateAdded: _editedProduct.dateAdded,
-                                      deadLine: _editedProduct.deadLine,
-                                    );
-                          },
-                        ),
-                        TextFormField(
-                          
-                          decoration: InputDecoration(labelText: 'Description'),
-                          maxLines: 3,
-                          keyboardType: TextInputType.multiline,
-                          focusNode: _descriptionFocusNode,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Please enter a description.';
+                            if (!value.startsWith('http') &&
+                                !value.startsWith('https')) {
+                              return 'Please enter a valid URL.';
                             }
-                            if (value.length < 10) {
-                              return 'Should be at least 10 characters long.';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                             _editedProduct=ToDoTask(
-                                      id: null,
-                                      title: _editedProduct.title,
-                                      detail: value,
-                                      imageUrl: _editedProduct.imageUrl,
-                                      dateAdded: _editedProduct.dateAdded,
-                                      deadLine: _editedProduct.deadLine,
-                                    );
-                          },
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            Container(
-                              width: 100,
-                              height: 100,
-                              margin: EdgeInsets.only(
-                                top: 8,
-                                right: 10,
-                              ),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 1,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              child: _imageController.text.isEmpty
-                                  ? Text('Enter a URL')
-                                  : FittedBox(
-                                      child: Image.network(
-                                        _imageController.text,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                            ),
-                            Expanded(
-                              child: TextFormField(
-                                decoration:
-                                    InputDecoration(labelText: 'Image URL'),
-                                keyboardType: TextInputType.url,
-                                textInputAction: TextInputAction.done,
-                                controller: _imageController,
-                                focusNode: _imageFocusNode,
-                                onFieldSubmitted: (_) {
-                                  _saveForm();
-                                },
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return 'Please enter an image URL.';
-                                  }
-                                  if (!value.startsWith('http') &&
-                                      !value.startsWith('https')) {
-                                    return 'Please enter a valid URL.';
-                                  }
 
-                                  return null;
-                                },
-                                onSaved: (value) {
-                                   _editedProduct=ToDoTask(
-                                      id: null,
-                                      title: _editedProduct.title,
-                                      detail: _editedProduct.detail,
-                                      imageUrl: value,
-                                      dateAdded: _editedProduct.dateAdded,
-                                      deadLine: _editedProduct.deadLine,
-                                    );
-                                },
-                              ),
-                            ),
-                          ],
+                            return null;
+                          },
+                          onSaved: (value) {
+                            _editedProduct = ToDoTask(
+                              id: null,
+                              title: _editedProduct.title,
+                              detail: _editedProduct.detail,
+                              imageUrl: value,
+                              dateAdded: _editedProduct.dateAdded,
+                              deadLine: _editedProduct.deadLine,
+                            );
+                          },
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ),
+                  _buildText(
+                      "Date", Theme.of(context).textTheme.title, 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      FlatButton.icon(
+                        color: Colors.grey[200],
+                        icon: Icon(Icons.calendar_today),
+                        onPressed: _pickDate,
+                        label: Text("Choose Date"),
+                      ),
+                      Text(_editedProduct.deadLine.isEmpty
+                          ? "No date selected!"
+                          : _editedProduct.deadLine)
+                    ],
+                  )
+                ],
               ),
-            ]),
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todolist/Provider/pagerItemProvider.dart';
+
+import '../Provider/pagerItemProvider.dart';
 
 class ChoiceChipItems extends StatefulWidget {
  
@@ -14,14 +15,15 @@ class _ChoiceChipItemsState extends State<ChoiceChipItems> {
   Widget build(BuildContext context) {
 
     final _height = MediaQuery.of(context).size.height;
-     final pageViewerItem=Provider.of<PagerItemProvider>(context,listen: false);
-     final _width = MediaQuery.of(context).size.width;
+    final pageViewerItem=Provider.of<PagerItemProvider>(context,listen: false);
+    final _width = MediaQuery.of(context).size.width;
+
     return Container(
       padding: EdgeInsets.only(left: 10),
       height: _height*0.1,
       width:_width,
       child: ListView.builder(
-                   padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: EdgeInsets.symmetric(horizontal: 10),
                   scrollDirection: Axis.horizontal,
                   itemCount:pageViewerItem.categoryItem.length,
                   physics: BouncingScrollPhysics(),

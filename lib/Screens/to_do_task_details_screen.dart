@@ -12,16 +12,6 @@ class ToDoTaskDetailsScreen extends StatefulWidget {
 }
 
 class _ToDoTaskDetailsScreenState extends State<ToDoTaskDetailsScreen> {
-  // final _toDoTask = ToDoTask(
-  //   id: "id",
-  //   title: "Date with Girl",
-  //   //subTitle: ""
-  //   detail: "Going to have a candle light dinner.",
-  //   dateAdded: "9/10/2019",
-  //   deadLine: DateTime.now(),
-  //   imageUrl:
-  //       "http://cupidspulse.com/wp-content/uploads/2011/10/couple-on-a-romantic-date-e1415925732177.jpg",
-  // );
 
   Container _buildText(String text, TextStyle style, double topMargin) {
     return Container(

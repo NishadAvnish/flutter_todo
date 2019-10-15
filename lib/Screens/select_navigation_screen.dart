@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todolist/Screens/profile_screen.dart';
-import 'package:todolist/Screens/to_do_task_details_screen.dart';
 
+import 'profile_screen.dart';
 import 'Home.dart';
 import 'statistics_screen.dart';
 
@@ -29,7 +28,7 @@ class _SelectNavigationScreenState extends State<SelectNavigationScreen> {
     }
   ];
 
-  BottomNavigationBarItem _buildBottomNavigationBar(String title, IconData icon){
+  BottomNavigationBarItem _buildBottomNavigationBarItem(String title, IconData icon){
 
     return BottomNavigationBarItem(
             icon: Icon(
@@ -49,15 +48,14 @@ class _SelectNavigationScreenState extends State<SelectNavigationScreen> {
           unselectedItemColor: Colors.grey,
           currentIndex: _selectedIndex,
           onTap: (index){
-            bool isSelected=index==_selectedIndex;
             setState(() {
               _selectedIndex = index;
             });
           },
           items: [
-            _buildBottomNavigationBar("Home", Icons.home),
-            _buildBottomNavigationBar("Profile", Icons.person_outline),
-            _buildBottomNavigationBar("Statistics", Icons.show_chart),
+            _buildBottomNavigationBarItem("Home", Icons.home),
+            _buildBottomNavigationBarItem("Profile", Icons.person_outline),
+            _buildBottomNavigationBarItem("Statistics", Icons.show_chart),
           ],
         
       ),
