@@ -37,45 +37,6 @@ List<String> _category=[
     }
 
     
-
-    // List<ToDoTask> _list=[
-    //   ToDoTask(
-    //     id:"jsbdjnsbdmncbsmdnc",
-    //     title: "School1",
-    //     imageUrl:"https://images.unsplash.com/photo-1570631550965-fe4e7b868d38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-    //     detail: "THIS IS A TETXT><D>A<M>A<",
-    //     dateAdded: DateTime.now(),
-    //      deadLine: DateTime.now(),
-
-    //   ),
-    //   ToDoTask(
-    //     id:"jsbdjnsbc",
-    //     title: "School2",
-    //     imageUrl:"https://images.unsplash.com/photo-1570631550965-fe4e7b868d38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-    //     detail: "THIS IS A TETXT><D>A<M>A<",
-    //     dateAdded: DateTime.now(),
-    //      deadLine: DateTime.now(),
-
-    //   ),
-    //   ToDoTask(
-    //     id:"jsmdnc",
-    //     title: "School3",
-    //     imageUrl:"https://images.unsplash.com/photo-1570631550965-fe4e7b868d38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-    //     detail: "THIS IS A TETXT><D>A<M>A<",
-    //     dateAdded: DateTime.now(),
-    //      deadLine: DateTime.now()
-
-    //   ),
-    //   ToDoTask(
-    //     id:"bdjnsbdmnnc",
-    //     title: "School4",
-    //     imageUrl:"https://images.unsplash.com/photo-1570631550965-fe4e7b868d38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-    //     detail: "THIS IS A TETXT><D>A<M>A<",
-    //     dateAdded: DateTime.now(),
-    //      deadLine: DateTime.now()
-
-    //   )
-    // ];
     
     int get values{
       return value;
